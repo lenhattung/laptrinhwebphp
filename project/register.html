@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký - MiniShop</title>
     <link rel="stylesheet" href="css/style.css">
+     <script src="js/main.js" defer></script>
 </head>
 <body>
     <!-- ĐẦU TRANG -->
@@ -24,7 +25,7 @@
     <main>
         <h2>Đăng ký tài khoản</h2>
 
-        <form action="register.html" method="get" class="form">
+        <form action="register.html" method="get" class="form"  id="register-form">
             <p>
                 <label for="fullname">Họ và tên</label><br>
                 <input type="text" id="fullname" name="fullname"
@@ -44,6 +45,7 @@
                 <label for="password2">Nhập lại mật khẩu</label><br>
                 <input type="password" id="password2" name="password2"
                        required minlength="6">
+                       <span class="error" id="password-error"></span>
             </p>
             <p>
                 <label for="phone">Số điện thoại</label><br>

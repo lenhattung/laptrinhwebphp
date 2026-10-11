@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MiniShop - Phụ kiện công nghệ</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
 </head>
+
 <body>
     <!-- ĐẦU TRANG -->
     <header class="site-header">
         <h1>MiniShop</h1>
         <nav class="main-nav">
-            <a href="index.html">Trang chủ</a> |
-            <a href="about.html">Giới thiệu</a> |
-            <a href="contact.html">Liên hệ</a> |
-            <a href="cart.html">Giỏ hàng</a> |
-            <a href="login.html">Đăng nhập</a> |
+            <a href="index.html">Trang chủ</a>
+            <a href="about.html">Giới thiệu</a>
+            <a href="contact.html">Liên hệ</a>
+            <a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a>
+            <a href="login.html">Đăng nhập</a>
             <a href="register.html">Đăng ký</a>
         </nav>
     </header>
@@ -31,6 +34,7 @@
                     <h3>Chuột không dây M1</h3>
                     <p class="price">250.000 đ</p>
                     <a href="product.html" class="btn">Xem chi tiết</a>
+                    <button type="button" class="btn btn-accent add-to-cart" data-id="1">Thêm vào giỏ</button>
                 </article>
 
                 <article class="product-card">
@@ -38,6 +42,7 @@
                     <h3>Bàn phím cơ K2</h3>
                     <p class="price">790.000 đ</p>
                     <a href="product.html" class="btn">Xem chi tiết</a>
+                    <button type="button" class="btn btn-accent add-to-cart" data-id="2">Thêm vào giỏ</button>
                 </article>
 
                 <article class="product-card">
@@ -45,6 +50,7 @@
                     <h3>Tai nghe Bluetooth T3</h3>
                     <p class="price">450.000 đ</p>
                     <a href="product.html" class="btn">Xem chi tiết</a>
+                    <button type="button" class="btn btn-accent add-to-cart" data-id="3">Thêm vào giỏ</button>
                 </article>
 
                 <article class="product-card">
@@ -52,6 +58,7 @@
                     <h3>USB 64GB U4</h3>
                     <p class="price">150.000 đ</p>
                     <a href="product.html" class="btn">Xem chi tiết</a>
+                    <button type="button" class="btn btn-accent add-to-cart" data-id="4">Thêm vào giỏ</button>
                 </article>
 
                 <article class="product-card">
@@ -59,6 +66,7 @@
                     <h3>Webcam Full HD W5</h3>
                     <p class="price">520.000 đ</p>
                     <a href="product.html" class="btn">Xem chi tiết</a>
+                    <button type="button" class="btn btn-accent add-to-cart" data-id="5">Thêm vào giỏ</button>
                 </article>
 
                 <article class="product-card">
@@ -66,6 +74,7 @@
                     <h3>Đế tản nhiệt laptop D6</h3>
                     <p class="price">320.000 đ</p>
                     <a href="product.html" class="btn">Xem chi tiết</a>
+                    <button type="button" class="btn btn-accent add-to-cart" data-id="6">Thêm vào giỏ</button>
                 </article>
             </div>
         </section>
@@ -76,4 +85,5 @@
         <p>&copy; 2026 MiniShop. Dự án thực hành lập trình web.</p>
     </footer>
 </body>
+
 </html>
