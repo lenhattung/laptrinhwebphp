@@ -1,28 +1,9 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giỏ hàng - MiniShop</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/main.js" defer></script>
-</head>
-<body>
-    <!-- ĐẦU TRANG -->
-    <header class="site-header">
-        <h1>MiniShop</h1>
-        <nav class="main-nav">
-            <a href="index.html">Trang chủ</a>
-            <a href="about.html">Giới thiệu</a>
-            <a href="contact.html">Liên hệ</a>
-            <a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a>
-            <a href="login.html">Đăng nhập</a>
-            <a href="register.html">Đăng ký</a>
-        </nav>
-    </header>
+<?php
+require __DIR__ . '/includes/init.php';
 
-    <!-- NỘI DUNG CHÍNH -->
-    <main>
+$pageTitle = 'Giới thiệu';
+require __DIR__ . '/includes/header.php';
+?>
         <h2>Giỏ hàng</h2>
 
         <table class="cart-table">
@@ -57,11 +38,4 @@
         </table>
 
         <p><button type="button" class="btn btn-accent">Đặt hàng</button></p>
-    </main>
-
-    <!-- CHÂN TRANG -->
-    <footer class="site-footer">
-        <p>&copy; 2026 MiniShop. Dự án thực hành lập trình web.</p>
-    </footer>
-</body>
-</html>
+ <?php require __DIR__ . '/includes/footer.php'; ?>

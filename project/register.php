@@ -1,31 +1,12 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký - MiniShop</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/main.js" defer></script>
-</head>
-<body>
-    <!-- ĐẦU TRANG -->
-    <header class="site-header">
-        <h1>MiniShop</h1>
-        <nav class="main-nav">
-            <a href="index.html">Trang chủ</a>
-            <a href="about.html">Giới thiệu</a>
-            <a href="contact.html">Liên hệ</a>
-            <a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a>
-            <a href="login.html">Đăng nhập</a>
-            <a href="register.html">Đăng ký</a>
-        </nav>
-    </header>
+<?php
+require __DIR__ . '/includes/init.php';
 
-    <!-- NỘI DUNG CHÍNH -->
-    <main>
+$pageTitle = 'Giới thiệu';
+require __DIR__ . '/includes/header.php';
+?>
         <h2>Đăng ký tài khoản</h2>
 
-        <form action="register.html" method="get" class="form" id="register-form">
+        <form action="register.php" method="get" class="form" id="register-form">
             <p>
                 <label for="fullname">Họ và tên</label><br>
                 <input type="text" id="fullname" name="fullname"
@@ -82,11 +63,4 @@
                 <button type="submit" class="btn">Đăng ký</button>
             </p>
         </form>
-    </main>
-
-    <!-- CHÂN TRANG -->
-    <footer class="site-footer">
-        <p>&copy; 2026 MiniShop. Dự án thực hành lập trình web.</p>
-    </footer>
-</body>
-</html>
+    <?php require __DIR__ . '/includes/footer.php'; ?>
