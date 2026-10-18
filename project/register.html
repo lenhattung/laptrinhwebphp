@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký - MiniShop</title>
     <link rel="stylesheet" href="css/style.css">
-     <script src="js/main.js" defer></script>
+    <script src="js/main.js" defer></script>
 </head>
 <body>
     <!-- ĐẦU TRANG -->
     <header class="site-header">
         <h1>MiniShop</h1>
         <nav class="main-nav">
-            <a href="index.html">Trang chủ</a> |
-            <a href="about.html">Giới thiệu</a> |
-            <a href="contact.html">Liên hệ</a> |
-            <a href="cart.html">Giỏ hàng</a> |
-            <a href="login.html">Đăng nhập</a> |
+            <a href="index.html">Trang chủ</a>
+            <a href="about.html">Giới thiệu</a>
+            <a href="contact.html">Liên hệ</a>
+            <a href="cart.html">Giỏ hàng (<span id="cart-count">0</span>)</a>
+            <a href="login.html">Đăng nhập</a>
             <a href="register.html">Đăng ký</a>
         </nav>
     </header>
@@ -25,7 +25,7 @@
     <main>
         <h2>Đăng ký tài khoản</h2>
 
-        <form action="register.html" method="get" class="form"  id="register-form">
+        <form action="register.html" method="get" class="form" id="register-form">
             <p>
                 <label for="fullname">Họ và tên</label><br>
                 <input type="text" id="fullname" name="fullname"
@@ -45,7 +45,7 @@
                 <label for="password2">Nhập lại mật khẩu</label><br>
                 <input type="password" id="password2" name="password2"
                        required minlength="6">
-                       <span class="error" id="password-error"></span>
+                <span class="error" id="password-error"></span>
             </p>
             <p>
                 <label for="phone">Số điện thoại</label><br>
@@ -79,7 +79,7 @@
                 <label for="agree">Tôi đồng ý với điều khoản sử dụng</label>
             </p>
             <p>
-                <button type="submit">Đăng ký</button>
+                <button type="submit" class="btn">Đăng ký</button>
             </p>
         </form>
     </main>
