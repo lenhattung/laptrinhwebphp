@@ -21,3 +21,8 @@
     </header>
 
     <main>
+
+    <?php $flash = get_flash(); ?>
+    <?php if ($flash): ?>
+        <p class="alert alert-<?= e($flash['type']) ?>"><?= e($flash['message']) ?></p>
+    <?php endif; ?>

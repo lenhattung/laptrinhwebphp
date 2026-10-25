@@ -376,3 +376,9 @@ tbody tr:nth-child(even) {
     background-color: #eaf6ec;
     color: #1b5e20;
 }
+
+.alert-error {
+    border-color: var(--danger);
+    background-color: #fdecea;
+    color: var(--danger);
+}
