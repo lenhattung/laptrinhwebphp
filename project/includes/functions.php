@@ -20,3 +20,26 @@ function url($path = '')
 {
     return BASE_URL . ltrim($path, '/');
 }
+
+
+// ===== 2. Chuyển hướng và thông báo một lần =====
+
+function redirect($path)
+{
+    header('Location: ' . url($path));
+    exit;
+}
+
+// $type là 'success' hoặc 'error'
+function set_flash($type, $message)
+{
+    $_SESSION['flash'] = ['type' => $type, 'message' => $message];
+}
+
+// Lấy thông báo ra và xóa luôn, nên nó chỉ hiện đúng một lần
+function get_flash()
+{
+    $flash = $_SESSION['flash'] ?? null;
+    unset($_SESSION['flash']);
+    return $flash;
+}
