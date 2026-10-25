@@ -43,3 +43,31 @@ function get_flash()
     unset($_SESSION['flash']);
     return $flash;
 }
+
+
+// ===== 3. Tài khoản =====
+
+function current_user()
+{
+    return $_SESSION['user'] ?? null;
+}
+
+function is_logged_in()
+{
+    return current_user() !== null;
+}
+
+function is_admin()
+{
+    return is_logged_in() && current_user()['role'] === 'admin';
+}
+
+// Đặt ở đầu những trang bắt buộc đăng nhập
+function require_login()
+{
+    if (!is_logged_in()) {
+        set_flash('error', 'Vui lòng đăng nhập để tiếp tục.');
+        redirect('login.php');
+    }
+}
+
