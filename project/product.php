@@ -54,6 +54,14 @@ require __DIR__ . '/includes/header.php';
             </tbody>
         </table>
 
+        <?php if ($product['stock'] > 0): ?>
+            <form action="<?= url('cart-add.php') ?>" method="post" class="cart-actions">
+                <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+                <input type="number" name="quantity" value="1" min="1" max="<?= $product['stock'] ?>">
+                <button type="submit" class="btn btn-accent">Thêm vào giỏ</button>
+            </form>
+        <?php endif; ?>
+
         <p><a href="<?= url('index.php') ?>">&laquo; Quay lại danh sách sản phẩm</a></p>
     </div>
 </article>

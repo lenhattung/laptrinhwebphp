@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = 'Email không hợp lệ.';
     }
-    if (!preg_match('/^0[0-9]{9}$/', $phone)) { //regex: bắt đầu bằng 0, theo sau là 9 chữ số
+    if (!preg_match('/^0[0-9]{9}$/', $phone)) {
         $errors['phone'] = 'Số điện thoại gồm 10 chữ số, bắt đầu bằng số 0.';
     }
     if (strlen($password) < 6) {
@@ -32,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($password !== $password2) {
         $errors['password2'] = 'Hai mật khẩu không khớp nhau.';
     }
-
     if (empty($_POST['agree'])) {
         $errors['agree'] = 'Bạn cần đồng ý với điều khoản sử dụng.';
     }
@@ -58,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect('login.php');
     }
 }
-
 
 $pageTitle = 'Đăng ký';
 require __DIR__ . '/includes/header.php';

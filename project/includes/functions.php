@@ -21,7 +21,6 @@ function url($path = '')
     return BASE_URL . ltrim($path, '/');
 }
 
-
 // ===== 2. Chuyển hướng và thông báo một lần =====
 
 function redirect($path)
@@ -43,7 +42,6 @@ function get_flash()
     unset($_SESSION['flash']);
     return $flash;
 }
-
 
 // ===== 3. Tài khoản =====
 
@@ -71,3 +69,51 @@ function require_login()
     }
 }
 
+// ===== 4. Giỏ hàng =====
+// Giỏ hàng nằm trong session, dạng [mã sản phẩm => số lượng]
+
+function cart_count()
+{
+    return array_sum($_SESSION['cart'] ?? []);
+}
+
+// Trả về [danh sách dòng hàng, tổng tiền]; tên và giá luôn lấy từ CSDL
+function get_cart_items($pdo)
+{
+    $cart = $_SESSION['cart'] ?? [];
+    if (!$cart) {
+        return [[], 0];
+    }
+
+    $placeholders = implode(',', array_fill(0, count($cart), '?'));
+    $stmt = $pdo->prepare("SELECT id, name, price, image, stock FROM products WHERE id IN ($placeholders)");
+    $stmt->execute(array_keys($cart));
+
+    $items = [];
+    $total = 0;
+    foreach ($stmt->fetchAll() as $product) {
+        $quantity = $cart[$product['id']];
+        $product['quantity'] = $quantity;
+        $product['line_total'] = $product['price'] * $quantity;
+        $total += $product['line_total'];
+        $items[] = $product;
+    }
+    return [$items, $total];
+}
+
+// ===== 5. Đơn hàng =====
+
+function order_statuses()
+{
+    return [
+        'pending'   => 'Chờ xử lý',
+        'shipping'  => 'Đang giao',
+        'completed' => 'Hoàn tất',
+        'cancelled' => 'Đã hủy',
+    ];
+}
+
+function order_status_label($status)
+{
+    return order_statuses()[$status] ?? $status;
+}
