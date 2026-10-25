@@ -1,35 +1,69 @@
 <?php
 require __DIR__ . '/includes/init.php';
 
-// Dữ liệu tạm thời, viết cứng trong mã. Lab 3.4 sẽ lấy từ cơ sở dữ liệu.
-// $products = [
-//     ['id' => 1, 'name' => 'Chuột không dây M1', 'price' => 250000, 'image' => 'images/sp01.jpg'],
-//     ['id' => 2, 'name' => 'Bàn phím cơ K2', 'price' => 790000, 'image' => 'images/sp02.jpg'],
-//     ['id' => 3, 'name' => 'Tai nghe Bluetooth T3', 'price' => 450000, 'image' => 'images/sp03.jpg'],
-//     ['id' => 4, 'name' => 'USB 64GB U4', 'price' => 150000, 'image' => 'images/sp04.jpg'],
-//     ['id' => 5, 'name' => 'Webcam Full HD W5', 'price' => 520000, 'image' => 'images/sp05.jpg'],
-//     ['id' => 6, 'name' => 'Đế tản nhiệt laptop D6', 'price' => 320000, 'image' => 'images/sp06.jpg'],
-// ];
+// Đọc tham số trên URL: index.php?category=2&q=chuột
+$categoryId = (int) ($_GET['category'] ?? 0);
+$keyword = trim($_GET['q'] ?? '');
 
-$stmt = $pdo->query('SELECT id, name, price, image FROM products ORDER BY id');
+$categories = $pdo->query('SELECT id, name FROM categories ORDER BY id')->fetchAll();
+
+// Ghép câu truy vấn theo điều kiện lọc; giá trị luôn đi qua tham số ?
+$sql = 'SELECT id, name, price, image FROM products';
+$where = [];
+$params = [];
+if ($categoryId > 0) {
+    $where[] = 'category_id = ?';
+    $params[] = $categoryId;
+}
+if ($keyword !== '') {
+    $where[] = 'name LIKE ?';
+    $params[] = '%' . $keyword . '%';
+}
+if ($where) {
+    $sql .= ' WHERE ' . implode(' AND ', $where);
+}
+$sql .= ' ORDER BY id';
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
 $products = $stmt->fetchAll();
 
 $pageTitle = 'Trang chủ';
 require __DIR__ . '/includes/header.php';
 ?>
 <section>
-    <h2>Sản phẩm nổi bật</h2>
+    <h2>Sản phẩm</h2>
+
+    <form action="<?= url('index.php') ?>" method="get" class="search-form">
+        <input type="search" name="q" value="<?= e($keyword) ?>" placeholder="Tìm sản phẩm...">
+        <?php if ($categoryId > 0): ?>
+            <input type="hidden" name="category" value="<?= $categoryId ?>">
+        <?php endif; ?>
+        <button type="submit" class="btn">Tìm</button>
+    </form>
+
+    <p class="category-bar">
+        <a href="<?= url('index.php') ?>" class="<?= $categoryId === 0 ? 'active' : '' ?>">Tất cả</a>
+        <?php foreach ($categories as $category): ?>
+            <a href="<?= url('index.php?category=' . $category['id']) ?>"
+               class="<?= $categoryId === $category['id'] ? 'active' : '' ?>"><?= e($category['name']) ?></a>
+        <?php endforeach; ?>
+    </p>
+
+    <?php if (!$products): ?>
+        <p>Không tìm thấy sản phẩm nào.</p>
+    <?php endif; ?>
 
     <div class="product-list">
         <?php foreach ($products as $product): ?>
-         <article class="product-card">
-            <img src="<?= url($product['image']) ?>" alt="<?= e($product['name']) ?>">
-            <h3><?= e($product['name']) ?></h3>
-            <p class="price"><?= format_price($product['price']) ?></p>
-            <a href="<?= url('product.php?id=' . $product['id']) ?>" class="btn">Xem chi tiết</a>
-            <button type="button" class="btn btn-accent add-to-cart"
-                    data-id="<?= $product['id'] ?>">Thêm vào giỏ</button>
-        </article>
+            <article class="product-card">
+                <img src="<?= url($product['image']) ?>" alt="<?= e($product['name']) ?>">
+                <h3><?= e($product['name']) ?></h3>
+                <p class="price"><?= format_price($product['price']) ?></p>
+                <a href="<?= url('product.php?id=' . $product['id']) ?>" class="btn">Xem chi tiết</a>
+                <button type="button" class="btn btn-accent add-to-cart"
+                        data-id="<?= $product['id'] ?>">Thêm vào giỏ</button>
+            </article>
         <?php endforeach; ?>
     </div>
 </section>
